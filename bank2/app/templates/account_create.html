@@ -1,0 +1,39 @@
+{% extends 'temp/base.html' %}
+{% block content %}
+
+<br><br>
+<div id="demo1">
+    
+  <table border="2px solid" style="height: 200px;">
+    <h1>Create New Account</h1><br><br><br>
+    <form method="POST" enctype="multipart/form-data">  <!-- Added enctype -->
+        {% csrf_token %}
+        <tr>
+            <td><label for="name">Name:</label></td>
+            <td><input type="text" id="name" name="name" required></td> 
+        </tr>
+        <tr>
+            <td><label for="phone">Phone Number:</label></td>
+              <td><input type="text" id="phone" name="phone" required></td>
+        </tr>
+        <tr>
+         <td>
+            <label for="email">Email:</label></td>
+           <td><input type="email" id="email" name="email" required>
+         </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="photo">Upload Photo:</label><!-- New field for photo -->  </td>
+                <td><input type="file" id="photo" name="photo" accept="image/*"></td>
+                
+          
+        </tr>
+        <tr>
+            <td colspan="2"><center><input type="submit" value="Create Account" ></center></td>
+            <!-- <td></td> -->
+        </tr>
+    </form>
+  </table>
+</div>
+    {% endblock content %}

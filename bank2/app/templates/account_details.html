@@ -1,0 +1,46 @@
+{% extends 'temp/base.html' %}
+{% block content %}
+<br><br>
+<h1>Your Details</h1>
+<br>
+{% if account %}
+    <div>
+        <p><strong>Name:</strong> {{ account.name }}</p>
+        <p><strong>Phone Number:</strong> {{ account.phone }}</p>
+        <p><strong>Email:</strong> {{ account.email }}</p>
+        <p><strong>Account Number:</strong> {{ account.account_no }}</p>
+        <p><strong>Balance:</strong> {{ account.balance }}</p>
+        {% if account.photo %}
+            <img src="{{ account.photo.url }}" alt="Profile Photo" style="width: 150px; height: auto;">
+        {% else %}
+            <p>No photo available.</p>
+        {% endif %}
+    </div>
+{% else %}
+    <table border="1px" style="height: 150px;">
+        <form action="{% url 'account_details' %}" method="post">
+            {% csrf_token %}
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input type="text" name="name" id="name" required></td>
+            </tr>
+    
+            <tr>
+                <td><label for="phone">Phone Number:</label></td>
+                <td><input type="text" name="phone" id="phone" required></td>
+            </tr>
+            <tr>
+                <td colspan="2"><center><button type="submit">Get Details</button></center></td>
+                <!-- <td></td> -->
+            </tr>
+            
+        </form>
+    </table>
+{% endif %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="error-message">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+{% endblock content %}

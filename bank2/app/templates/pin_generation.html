@@ -1,0 +1,43 @@
+{% extends 'temp/base.html' %}
+{% block content %}
+<style>
+        .success-message {
+            color: green;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+<br><br>
+<table border="2px solid" style="height: 300px;">
+    <h1>Please generate your PIN carefully 🙈</h1> <br><br>
+    <form action="{% url 'pin_generation' %}" method="POST">
+        {% csrf_token %}
+        <tr>
+            <td><label for="name">Name</label></td>
+            <td><input type="text" name="name" id="name" required></td>
+        </tr>
+        <tr>
+            <td><label for="phone">Phone Number</label></td>
+            <td> <input type="text" name="phone" id="phone" required></td>
+        </tr>
+        <tr>
+            <td><label for="pin">Enter PIN</label></td>
+            <td><input type="text" name="pin" id="pin" required></td>
+        </tr>
+        <tr>
+            <td><label for="confirm_pin">Confirm PIN</label></td>
+            <td><input type="text" name="confirm_pin" id="confirm_pin" required></td>
+        </tr>
+     <tr>
+        <td colspan="2"><center><button type="submit">Generate PIN</button></center></td>
+        <!-- <td></td> -->
+     </tr>
+    </form>
+</table>
+    <br><br>
+    {% if messages %}
+    {% for message in messages %}
+        <div class="success-message">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+{% endblock content %}
